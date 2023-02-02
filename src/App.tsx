@@ -1,11 +1,12 @@
-import Navbar from "@/components/navbar";
-import { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { SelectedPage } from "@/shared/types";
-import Home from "./components/home/Home";
-import Benefits from "./components/benefits/Benefits";
-import OurClasses from "./components/ourClasses";
-import ContactUs from "./components/contactus";
-import Footer from "./components/footer";
+
+const Navbar = React.lazy(() => import("@/components/navbar"));
+const Home = React.lazy(() => import("@/components/home/Home"));
+const Benefits = React.lazy(() => import("@/components/benefits/Benefits"));
+const OurClasses = React.lazy(() => import("@/components/ourClasses"));
+const ContactUs = React.lazy(() => import("@/components/contactus"));
+const Footer = React.lazy(() => import("@/components/footer"));
 
 function App() {
   const [selectedPage, setSelectedPage] = useState<SelectedPage>(
@@ -29,16 +30,29 @@ function App() {
 
   return (
     <div className="App bg-gray-20">
-      <Navbar
-        selectedPage={selectedPage}
-        setSelectedPage={setSelectedPage}
-        isTopOfPage={isTopOfPage}
-      />
-      <Home setSelectedPage={setSelectedPage} />
-      <Benefits setSelectedPage={setSelectedPage} />
-      <OurClasses setSelectedPage={setSelectedPage} />
-      <ContactUs setSelectedPage={setSelectedPage} />
-      <Footer />
+      <Suspense
+        fallback={
+          <div className="loader-container">
+            <div className="spinner"></div>
+          </div>
+        }
+      >
+        <Navbar
+          selectedPage={selectedPage}
+          setSelectedPage={setSelectedPage}
+          isTopOfPage={isTopOfPage}
+        />
+
+        <Home setSelectedPage={setSelectedPage} />
+
+        <Benefits setSelectedPage={setSelectedPage} />
+
+        <OurClasses setSelectedPage={setSelectedPage} />
+
+        <ContactUs setSelectedPage={setSelectedPage} />
+
+        <Footer />
+      </Suspense>
     </div>
   );
 }
