@@ -1,7 +1,7 @@
 # Emy-Gym React Fitness Landing page 
 React and typescript based GYM Landing page that has animation and lazy loading features added.
 
-![hero](https://prnt.sc/AQ11YZM_RZGg)
+![hero](https://i.postimg.cc/8CyH7rh9/Emy-Gym.png)
 
 
 This project was build with React + Typescript Technology : React, Typescipt, Animation & Lazy load
